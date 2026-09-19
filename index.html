@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Casa comigo pfvr</title>
+<meta name="description" content="Casa comigo pfvr 💙">
+<meta name="theme-color" content="#FF9EC0">
+<meta property="og:title" content="Casa comigo pfvr">
+<meta property="og:description" content="Responde aí vai 💙">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Nunito:wght@500;700;900&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --rosa-topo:#FFD3E2;
+    --rosa-base:#FF9EC0;
+    --caixa:#FFFFFF;
+    --vermelho:#D31C46;
+    --vermelho-fundo:#F04266;
+    --azul:#2F6BFF;
+    --tinta-suave:#7A5566;
+    --borda:#FFD9E5;
+    --sombra:rgba(159,30,72,.28);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  img{max-width:100%}
+  body{
+    margin:0;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    background:linear-gradient(170deg,var(--rosa-topo) 0%,var(--rosa-base) 100%);
+    background-attachment:fixed;
+    color:var(--tinta-suave);
+    font-family:"Nunito",ui-rounded,"Segoe UI",system-ui,sans-serif;
+    font-size:14px;
+    min-height:100%;
+    overflow-x:hidden;
+  }
+
+  /* chuva de coracoes ------------------------------------------------ */
+  #chuva{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+  .coracao{
+    position:absolute;
+    top:-12vh;
+    will-change:transform;
+    animation-name:cair;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    filter:drop-shadow(0 4px 6px rgba(159,30,72,.18));
+  }
+  @keyframes cair{
+    0%{transform:translate3d(0,-12vh,0) rotate(-18deg)}
+    100%{transform:translate3d(var(--deriva,0px),118vh,0) rotate(22deg)}
+  }
+
+  /* palco ------------------------------------------------------------ */
+  .palco{
+    position:relative;
+    z-index:1;
+    min-height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-inline:16px;
+    padding-block:40px;
+  }
+  .caixa{
+    width:100%;
+    max-width:520px;
+    background:var(--caixa);
+    border:1px solid var(--borda);
+    border-radius:32px;
+    box-shadow:0 26px 60px -20px var(--sombra),0 2px 0 rgba(255,255,255,.9) inset;
+    padding:clamp(28px,6vw,44px) clamp(20px,5vw,40px);
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    transition:padding .6s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .coracao-azul{
+    font-size:clamp(68px,16vw,108px);
+    line-height:1;
+    display:block;
+    animation:pulsar 1.9s ease-in-out infinite;
+  }
+  @keyframes pulsar{
+    0%,100%{transform:scale(1) rotate(-3deg)}
+    50%{transform:scale(1.09) rotate(3deg)}
+  }
+
+  h1{
+    margin:0;
+    font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+    font-weight:900;
+    font-size:clamp(32px,8vw,50px);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    color:var(--vermelho);
+    text-wrap:balance;
+  }
+
+  #frase{
+    margin:0;
+    min-height:1.6em;
+    font-size:clamp(16px,4.2vw,21px);
+    font-weight:700;
+    color:var(--tinta-suave);
+    transition:opacity .32s ease,transform .32s ease;
+  }
+  #frase.trocando{opacity:0;transform:translateY(6px)}
+
+  /* botoes ----------------------------------------------------------- */
+  .botoes{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    width:100%;
+    margin-top:4px;
+  }
+  .botao{
+    font-family:inherit;
+    font-weight:900;
+    font-size:18px;
+    line-height:1;
+    padding:15px 10px;
+    width:130px;
+    border-radius:999px;
+    border:2px solid transparent;
+    cursor:pointer;
+    max-width:100%;
+  }
+  #sim{
+    background:linear-gradient(160deg,var(--vermelho-fundo),var(--vermelho));
+    color:#fff;
+    box-shadow:0 12px 22px -10px var(--sombra);
+    font-size:calc(18px * var(--escala,1));
+    padding:calc(15px * var(--escala,1)) calc(10px * var(--escala,1));
+    width:calc(130px * var(--escala,1));
+    transition:font-size .85s cubic-bezier(.2,.8,.2,1),
+               padding .85s cubic-bezier(.2,.8,.2,1),
+               width .85s cubic-bezier(.2,.8,.2,1),
+               transform .18s ease;
+  }
+  #sim:hover{transform:translateY(-2px)}
+  #sim:active{transform:translateY(1px)}
+  #nao{
+    background:#fff;
+    color:var(--vermelho);
+    border-color:var(--borda);
+    box-shadow:0 8px 18px -12px var(--sombra);
+    transition:left .55s cubic-bezier(.22,1,.36,1),
+               top .55s cubic-bezier(.22,1,.36,1),
+               transform .55s cubic-bezier(.22,1,.36,1);
+  }
+  #nao.solto{
+    position:fixed;
+    z-index:5;
+    margin:0;
+  }
+  .botao:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+
+  .rodape{
+    margin:0;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#C58AA2;
+  }
+
+  /* festa ------------------------------------------------------------ */
+  .festa h1{font-size:clamp(30px,7.5vw,46px)}
+  .confete{
+    position:fixed;
+    z-index:4;
+    pointer-events:none;
+    animation:subir 1.5s ease-out forwards;
+  }
+  @keyframes subir{
+    0%{transform:translate(0,0) scale(.5);opacity:1}
+    100%{transform:translate(var(--dx),var(--dy)) scale(1.5);opacity:0}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .coracao,.coracao-azul,.confete{animation:none}
+    .coracao{display:none}
+    #sim,#nao,#frase,.caixa{transition-duration:.12s}
+  }
+</style>
+</head>
+<body>
+
+<div id="chuva" aria-hidden="true"></div>
+
+<main class="palco">
+  <section class="caixa" id="caixa">
+    <span class="coracao-azul" aria-hidden="true">💙</span>
+    <h1 id="titulo">Casa comigo pfvr</h1>
+    <p id="frase">Eu te amo!</p>
+    <div class="botoes" id="botoes">
+      <button class="botao" id="sim" type="button">Sim</button>
+      <button class="botao" id="nao" type="button">Não</button>
+    </div>
+    <p class="rodape" id="rodape">responde aí vai</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var sim = document.getElementById('sim');
+  var nao = document.getElementById('nao');
+  var caixa = document.getElementById('caixa');
+  var frase = document.getElementById('frase');
+  var botoes = document.getElementById('botoes');
+  var rodape = document.getElementById('rodape');
+  var suave = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- chuva de coracoes ---- */
+  var emojis = ['❤️','💖','💗','💕','💘','💓','💞'];
+  var chuva = document.getElementById('chuva');
+  var quantos = suave ? 0 : (window.innerWidth < 520 ? 22 : 38);
+  for(var i=0;i<quantos;i++){
+    var c = document.createElement('span');
+    c.className = 'coracao';
+    c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    c.style.left = (Math.random()*100).toFixed(2) + 'vw';
+    c.style.fontSize = (14 + Math.random()*26).toFixed(0) + 'px';
+    c.style.opacity = (0.45 + Math.random()*0.5).toFixed(2);
+    c.style.setProperty('--deriva', (Math.random()*120 - 60).toFixed(0) + 'px');
+    c.style.animationDuration = (6 + Math.random()*7).toFixed(2) + 's';
+    c.style.animationDelay = (-Math.random()*12).toFixed(2) + 's';
+    chuva.appendChild(c);
+  }
+
+  /* ---- sequencia de frases ---- */
+  var frases = ['Eu te amo!','Rumbora?','Vamo praga!'];
+  var idxFrase = 0;
+  var timerFrase = setInterval(function(){
+    idxFrase = (idxFrase + 1) % frases.length;
+    frase.classList.add('trocando');
+    setTimeout(function(){
+      frase.textContent = frases[idxFrase];
+      frase.classList.remove('trocando');
+    }, suave ? 40 : 320);
+  }, 2000);
+
+  /* ---- botao Nao fugindo ---- */
+  var solto = false, ultimaFuga = 0, cantoAtual = -1;
+  var ponteiro = {x: window.innerWidth/2, y: window.innerHeight/2};
+  var timerCrescer = null;
+  var escala = 1;
+
+  function soltar(){
+    if(solto) return;
+    var r = nao.getBoundingClientRect();
+    nao.style.width = r.width + 'px';
+    nao.style.height = r.height + 'px';
+    nao.style.left = r.left + 'px';
+    nao.style.top = r.top + 'px';
+    nao.classList.add('solto');
+    solto = true;
+    // o Sim fica sozinho e centralizado na caixa
+    botoes.style.justifyContent = 'center';
+    comecarACrescer();
+  }
+
+  function comecarACrescer(){
+    if(timerCrescer) return;
+    timerCrescer = setInterval(function(){
+      if(escala >= 2.4){ clearInterval(timerCrescer); timerCrescer = null; return; }
+      escala = Math.min(2.4, escala + 0.13);
+      sim.style.setProperty('--escala', escala.toFixed(2));
+    }, 900);
+  }
+
+  function cantos(){
+    var m = 14;
+    var w = nao.offsetWidth || 130;
+    var h = nao.offsetHeight || 46;
+    var maxX = Math.max(m, window.innerWidth - w - m);
+    var maxY = Math.max(m, window.innerHeight - h - m);
+    return [
+      {x:m, y:m}, {x:maxX, y:m},
+      {x:m, y:maxY}, {x:maxX, y:maxY}
+    ];
+  }
+
+  function fugir(){
+    var agora = Date.now();
+    if(agora - ultimaFuga < 260) return;
+    ultimaFuga = agora;
+    soltar();
+    var lista = cantos();
+    // escolhe entre os dois cantos mais distantes do ponteiro, nunca o atual
+    var ordenados = lista.map(function(p,i){
+      var dx = (p.x + nao.offsetWidth/2) - ponteiro.x;
+      var dy = (p.y + nao.offsetHeight/2) - ponteiro.y;
+      return {i:i, p:p, d:dx*dx + dy*dy};
+    }).sort(function(a,b){ return b.d - a.d; })
+      .filter(function(o){ return o.i !== cantoAtual; });
+    var escolhido = ordenados[Math.floor(Math.random()*Math.min(2, ordenados.length))];
+    cantoAtual = escolhido.i;
+    var jx = Math.random()*36, jy = Math.random()*36;
+    var x = escolhido.p.x + (escolhido.p.x < window.innerWidth/2 ? jx : -jx);
+    var y = escolhido.p.y + (escolhido.p.y < window.innerHeight/2 ? jy : -jy);
+    nao.style.left = Math.round(x) + 'px';
+    nao.style.top = Math.round(y) + 'px';
+  }
+
+  function tentouClicar(){
+    if(frases.indexOf('O Sim tá ficando maior hein kkkk') === -1){
+      frases.push('O Sim tá ficando maior hein kkkk');
+    }
+    rodape.textContent = 'o "não" tá meio escorregadio';
+    fugir();
+  }
+
+  nao.addEventListener('mouseenter', fugir);
+  nao.addEventListener('focus', fugir);
+  nao.addEventListener('pointerdown', function(e){ e.preventDefault(); tentouClicar(); });
+  nao.addEventListener('click', function(e){ e.preventDefault(); tentouClicar(); }); // clicar nele não faz nada
+
+  window.addEventListener('pointermove', function(e){
+    ponteiro.x = e.clientX; ponteiro.y = e.clientY;
+    var r = nao.getBoundingClientRect();
+    var cx = r.left + r.width/2, cy = r.top + r.height/2;
+    var dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+    if(dist < Math.max(r.width, r.height) * 0.95) fugir();
+  }, {passive:true});
+
+  // clique que erra o botão por pouco também conta como tentativa
+  window.addEventListener('pointerdown', function(e){
+    if(!solto || e.target === nao) return;
+    var r = nao.getBoundingClientRect();
+    var cx = r.left + r.width/2, cy = r.top + r.height/2;
+    if(Math.hypot(e.clientX - cx, e.clientY - cy) < 160) tentouClicar();
+  }, {passive:true});
+
+  window.addEventListener('resize', function(){
+    if(!solto) return;
+    var lista = cantos();
+    var p = lista[cantoAtual < 0 ? 0 : cantoAtual];
+    nao.style.left = p.x + 'px';
+    nao.style.top = p.y + 'px';
+  });
+
+  /* ---- Sim ---- */
+  sim.addEventListener('click', function(){
+    clearInterval(timerFrase);
+    if(timerCrescer){ clearInterval(timerCrescer); timerCrescer = null; }
+    nao.remove();
+    caixa.classList.add('festa');
+    document.getElementById('titulo').textContent = 'Eu sabia! 🥹💍';
+    frase.textContent = 'Vamo praga então — te amo demais!';
+    frase.classList.remove('trocando');
+    botoes.remove();
+    rodape.textContent = 'sim + sim = pra sempre';
+
+    if(suave) return;
+    var meio = {x: window.innerWidth/2, y: window.innerHeight/2};
+    for(var k=0;k<28;k++){
+      (function(k){
+        setTimeout(function(){
+          var p = document.createElement('span');
+          p.className = 'confete';
+          p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+          p.style.left = meio.x + 'px';
+          p.style.top = meio.y + 'px';
+          p.style.fontSize = (18 + Math.random()*22).toFixed(0) + 'px';
+          p.style.setProperty('--dx', (Math.random()*560 - 280).toFixed(0) + 'px');
+          p.style.setProperty('--dy', (-220 - Math.random()*320).toFixed(0) + 'px');
+          document.body.appendChild(p);
+          setTimeout(function(){ p.remove(); }, 1600);
+        }, k*45);
+      })(k);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
